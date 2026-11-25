@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raimonds Krastiņš · PORTFOLIO</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+</head>
+<body style="margin:0; background:#111010;">
+
+<style>
+  :root {
+    --ink: #b984ff;
+    --ink-muted: #b984ff;
+    --ink-dim: #5a5652;
+    --surface: #111010;
+    --surface-raised: #1a1917;
+    --surface-card: #201f1d;
+    --accent: rgb(200, 169, 126);
+    --accent-dim: #6b5a44;
+    --border: rgba(200,169,126,0.15);
+    --border-soft: rgba(200,169,126,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body, .portfolio-root { font-family: var(--font-sans, 'Inter', sans-serif); background: var(--surface); color: var(--ink); }
+  .portfolio-root { min-height: 100vh; }
+
+  /* NAV */
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 3rem; border-bottom: 0.5px solid var(--border); position: sticky; top: 0; background: rgba(17,16,16,0.95); backdrop-filter: blur(8px); z-index: 10; }
+  .nav-logo { font-size: 18px; font-weight: 500; letter-spacing: 0.08em; color: var(--accent); cursor: pointer; }
+  .nav-right { display: flex; align-items: center; gap: 6rem; }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a { font-size: 13px; letter-spacing: 0.06em; color: var(--ink-muted); text-decoration: none; text-transform: uppercase; transition: color 0.2s; cursor: pointer; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a.active { color: var(--ink); }
+  #lang-btn { background:none; border:0.5px solid var(--accent-dim); color:var(--accent); font-size:12px; letter-spacing:0.1em; padding:5px 14px; cursor:pointer; font-family:inherit; text-transform:uppercase; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+  #lang-btn:hover { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+
+  /* LANGUAGE TOGGLE — every translated piece of content exists twice in the HTML
+     (once per language) and CSS just shows/hides the right copy, the same way
+     the work descriptions already work. No JS text-swapping dictionary needed. */
+  .i18n-lv, .i18n-lv-inline { display: none; }
+  body.is-lv .i18n-en, body.is-lv .i18n-en-inline { display: none; }
+  body.is-lv .i18n-lv { display: block; }
+  body.is-lv .i18n-lv-inline { display: inline; }
+
+  /* SECTIONS */
+  section { display: none; padding: 4rem 3rem; max-width: 2560px; margin: 0 auto; }
+  section.active { display: block; }
+
+  /* HERO */
+
+.hero { 
+  position: relative; /* Anchor for the pseudo-element */
+  text-align: center; 
+  padding: 10rem 1rem 2rem;
+  /* Keeps your original gradient background */
+  background-image: linear-gradient(rgba(185, 132, 255, 0.08), rgba(0, 0, 0, 0.0));
+  overflow: hidden; /* Prevents image from spilling outside */
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 45%;
+  left: 0%;
+  transform: translate(-50%, -50%); /* Centers the image */
+  
+  /* Size controls: adjust width/height to make image smaller */
+  width: 700px;  
+  height: 700px; 
+  
+  background-image: url('images/profile-pic-wireframe-04.png');
+  background-size: contain; /* Keeps full image without clipping */
+  background-repeat: no-repeat;
+  background-position: center;
+  
+-webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 45%;
+  left: 100%;
+  transform: translate(-50%, -50%); /* Centers the image */
+  
+  /* Size controls: adjust width/height to make image smaller */
+  width: 700px;  
+  height: 700px; 
+  
+  background-image: url('images/profile-pic-wireframe-04.png');
+  background-size: contain; /* Keeps full image without clipping */
+  background-repeat: no-repeat;
+  background-position: center;
+  
+-webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+}
+
+/* Ensures all text, buttons, and dividers stay on top of the image */
+.hero > * {
+  position: relative;
+  z-index: 2;
+
+
+
+
+}
+  .hero-eyebrow { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; }
+  .hero-title { font-size: 56px; font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 2rem; }
+  .hero-title em { font-style: italic; color: var(--accent); }
+  .hero-sub { font-size: 16px; color: var(--accent); line-height: 1.7; max-width: 480px; margin: 0 auto 5rem; }
+  .hero-cta { display: inline-block; padding: 0.75rem 2rem; border: 0.5px solid var(--ink); color: var(--ink); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s; }
+  .hero-cta:hover { background: var(--ink); color: var(--surface); }
+  .hero-divider { width: 60px; height: 0.5px; background: var(--accent-dim); margin: 2rem auto 0; }
+
+  /* WORKS */
+  .Works-header { margin-bottom: 2.5rem; }
+  .Works-header h2 { font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  .Works-header p { font-size: 24px; font-weight: 500; color: var(--ink); }
+  .Works-filter { display: flex; gap: 1rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+  .filter-btn { padding: 6px 18px; border: 0.5px solid var(--border); background: none; color: var(--ink-muted); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+  .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-btn.active { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+  .Works-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5px; }
+  .Works-item { aspect-ratio: 1; background: var(--surface-card); overflow: hidden; position: relative; cursor: pointer; }
+  .Works-swatch { width: 100%; height: 100%; display: flex; align-items: flex-end; padding: 1.25rem; transition: transform 0.4s ease; }
+  .Works-item:hover .Works-swatch { transform: scale(1.03); }
+  .Works-swatch-1 { background: linear-gradient(135deg, #1a0e2e 0%, #3d1a4a 40%, #7b2d5a 100%); }
+  .Works-swatch-2 { background: linear-gradient(160deg, #0d1a1f 0%, #1a3a3a 50%, #0f2a20 100%); }
+  .Works-swatch-3 { background: linear-gradient(145deg, #1f1209 0%, #4a2010 40%, #8b3a1a 100%); }
+  .Works-swatch-4 { background: linear-gradient(120deg, #080d1a 0%, #12224a 40%, #1a3366 100%); }
+  .Works-swatch-5 { background: linear-gradient(150deg, #0e0e14 0%, #1e1a2e 50%, #2d2040 100%); }
+  .Works-item-label { 
+  position: absolute; 
+  bottom: 0; 
+  padding: 1.25rem; 
+  z-index: 2; 
+  width: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 66%, rgba(0,0,0,0.9) 100%);
+}
+  .Works-item-label span { display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(232,228,220,0.5); }
+  .Works-item-label strong { display: block; font-size: 14px; font-weight: 500; color: var(--ink); }
+  .Works-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0); transition: background 0.3s; display: flex; align-items: center; justify-content: center; }
+  .Works-item:hover .Works-overlay { background: rgba(0,0,0,0.35); }
+  .Works-overlay-icon { opacity: 0; transition: opacity 0.3s; color: var(--accent); font-size: 24px; }
+  .Works-item:hover .Works-overlay-icon { opacity: 1; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 2.5fr 1.5fr; gap: 5rem; align-items: start; }
+  .about-portrait { aspect-ratio: 30/38; background: linear-gradient(160deg, #2d223b 0%, #2a1d3b 40%, #352f21 100%); border: 2.5px solid var(--border); overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+  .about-portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .about-eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .about-name { font-size: 36px; font-weight: 500; color: var(--ink); line-height: 1.1; margin-bottom: 1.5rem; }
+  .about-bio { font-size: 15px; color: var(--ink-muted); line-height: 1.8; margin-bottom: 4rem; }
+  .about-bio p + p { margin-top: 1rem; }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 4rem; }
+  .about-stat { border: 0.5px solid var(--border); padding: 1rem; }
+  .about-stat-num { font-size: 28px; font-weight: 500; color: var(--accent); }
+  .about-stat-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-dim); margin-top: 2px; }
+  .about-tools-section { margin-bottom: 1.5rem; }
+  .about-tools-section .about-eyebrow { margin-bottom: 0.75rem; }
+  .about-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .about-tag { padding: 4px 14px; border: 0.5px solid var(--border); font-size: 12px; letter-spacing: 0.06em; color: var(--ink-muted); }
+  .about-exhibitions-list p { font-size: 14px; color: var(--ink-muted); line-height: 2; }
+
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; }
+  .contact-info h2 { font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+  .contact-info > p { font-size: 28px; font-weight: 500; color: var(--ink); line-height: 1.3; margin-bottom: 2rem; }
+  .contact-detail { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
+  .contact-detail-icon { width: 36px; height: 36px; border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 16px; flex-shrink: 0; }
+  .contact-detail-text { font-size: 14px; color: var(--ink-muted); }
+  .contact-avail { margin-top: 2rem; display: inline-flex; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); }
+  .contact-avail-dot { width: 6px; height: 6px; border-radius: 50%; background: #4caf84; }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-field { display: flex; flex-direction: column; gap: 6px; }
+  .form-field label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-dim); }
+  .form-field input, .form-field textarea, .form-field select { background: var(--surface-card); border: 0.5px solid var(--border); color: var(--ink); font-size: 14px; padding: 10px 14px; font-family: inherit; outline: none; transition: border-color 0.2s; }
+  .form-field input:focus, .form-field textarea:focus, .form-field select:focus { border-color: var(--accent-dim); }
+  .form-field textarea { resize: vertical; min-height: 100px; }
+  .form-field select option { background: var(--surface-card); }
+  .form-submit { margin-top: 0.5rem; padding: 12px; border: 0.5px solid var(--accent); background: none; color: var(--accent); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s; font-family: inherit; }
+  .form-submit:hover { background: var(--accent); color: var(--surface); }
+
+  /* FOOTER */
+  footer { border-top: 0.5px solid var(--border-soft); padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; margin-top: 4rem; }
+  footer p { font-size: 12px; color: var(--ink-dim); letter-spacing: 0.04em; }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { font-size: 12px; color: var(--ink-dim); text-decoration: none; cursor: pointer; }
+  .footer-links a:hover { color: var(--accent); }
+
+  /* LIGHTBOX */
+  #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 100; overflow-y: auto; padding: 2rem; }
+  #lightbox-inner { max-width: 900px; margin: 0 auto; padding-top: 2rem; }
+  #lightbox-media { display: flex; flex-direction: column; gap: 1rem; }
+  #lightbox-photos { margin-top: 2rem; }
+#lightbox-info { margin-top: 2rem; border-top: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); padding-top: 1.5rem; padding-bottom: 0.5rem; }
+  #lightbox-title { font-size: 28px; font-weight: 500; color: var(--ink); margin-bottom: 1rem; }
+  #lightbox-desc p { font-size: 15px; color: var(--ink-muted); line-height: 1.8; margin-bottom: 1rem; }
+  #lightbox-desc p em { font-style: italic; color: var(--accent); }
+  #lightbox-close { position: fixed; top: 1.5rem; right: 2rem; background: none; border: none; color: var(--accent); font-size: 28px; cursor: pointer; z-index: 101; }
+  #lightbox-lang { position: fixed; bottom: 1.5rem; right: 2rem; background: none; border: 0.5px solid var(--accent-dim); color: var(--accent); font-size: 12px; letter-spacing: 0.1em; padding: 5px 14px; cursor: pointer; font-family: inherit; text-transform: uppercase; z-index: 101; transition: border-color 0.2s, background 0.2s, color 0.2s; }
+  #lightbox-lang:hover { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+
+@media (max-width: 768px) { 
+
+  /* NAV */
+  nav { padding: 1rem 1.25rem; flex-wrap: wrap; gap: 0.75rem; }
+  .nav-logo { font-size: 14px; }
+  .nav-right { gap: 1rem; }
+  .nav-links { gap: 0.85rem; flex-wrap: wrap; }
+  .nav-links a { font-size: 11px; }
+  #lang-btn { font-size: 11px; padding: 4px 10px; }
+
+  /* SECTIONS */
+  section { padding: 2rem 1.5rem; }
+
+  /* HERO */
+  .hero { padding: 3rem 1rem 2rem; }
+  .hero::before, .hero::after { width: 320px; height: 320px; }
+  .hero-title { font-size: 32px; }
+  .hero-sub { font-size: 14px; margin-bottom: 2.5rem; }
+
+  /* WORKS */
+  .Works-grid { grid-template-columns: 1fr; }
+  .Works-item { grid-column: span 1 !important; aspect-ratio: 16/9 !important; }
+
+  /* ABOUT — stack all 3 columns vertically */
+  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .about-portrait { aspect-ratio: 3/4; }
+  .about-name { font-size: 26px; }
+  .about-stats { grid-template-columns: 1fr 1fr 1fr; }
+
+  /* CONTACT — stack columns vertically */
+  .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .contact-info > p { font-size: 20px; }
+
+  /* FOOTER */
+  footer { flex-direction: column; gap: 1rem; text-align: center; padding: 1.5rem; }
+
+  /* LIGHTBOX */
+  #lightbox { padding: 1rem; }
+  #lightbox-inner { padding-top: 3rem; }
+  #lightbox-title { font-size: 20px; }
+  #lightbox-close { top: 1rem; right: 1rem; font-size: 22px; }
+  #lightbox-lang { bottom: 1rem; right: 1rem; }
+}
+</style>
+
+<div class="portfolio-root">
+
+ <!-- NAV -->
+  <nav>
+    <div class="nav-logo"><p style="text-align:center;" href="#" class="active" data-section="hero" onclick="showSection('hero',this);return false;">R A Y · C G I</p></div>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#" class="active" data-section="hero" onclick="showSection('hero',this);return false;"><span class="i18n-en-inline">Home</span><span class="i18n-lv-inline">Sākums</span></a>
+        <a href="#" data-section="Works" onclick="showSection('Works',this);return false;"><span class="i18n-en-inline">Works</span><span class="i18n-lv-inline">Darbi</span></a>
+        <a href="#" data-section="about" onclick="showSection('about',this);return false;"><span class="i18n-en-inline">About</span><span class="i18n-lv-inline">Par mani</span></a>
+        <a href="#" data-section="contact" onclick="showSection('contact',this);return false;"><span class="i18n-en-inline">Contact</span><span class="i18n-lv-inline">Kontakti</span></a>
+      </div>
+      <!-- Button always shows the OTHER language's label, i.e. what you'll switch to -->
+      <button id="lang-btn" onclick="toggleLang()"><span class="i18n-en-inline">LV</span><span class="i18n-lv-inline">EN</span></button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+<section id="hero" class="active">
+  <div class="hero">
+    <div class="hero-image"></div> <!-- Added container -->
+    <p class="hero-eyebrow i18n-en">Visual artist</p>
+    <p class="hero-eyebrow i18n-lv">Vizuālais mākslinieks</p>
+    <h1 class="hero-title">RAIMONDS KRASTIŅŠ</h1>
+    <p class="hero-sub i18n-en">· 3D Modeling · 3D Animation · Environment Art ·</p>
+    <p class="hero-sub i18n-lv">· 3D Modelēšana · 3D Animācija · Vides māksla ·</p>
+    <div class="hero-cta" onclick="showSection('Works', document.querySelector('[data-section=Works]'))"><span class="i18n-en-inline">View portfolio</span><span class="i18n-lv-inline">Skatīt portfolio</span></div>
+    <div class="hero-divider"></div>
+  </div>
+</section>
+
+ <!-- WORKS -->
+  <section id="Works">
+    <div class="Works-header">
+      <h2 class="i18n-en">Works</h2>
+      <h2 class="i18n-lv">Darbi</h2>
+      <p>2022–2026</p>
+    </div>
+    <div class="Works-filter">
+      <button class="filter-btn active" data-filter="all"><span class="i18n-en-inline">All</span><span class="i18n-lv-inline">Visi</span></button>
+      <button class="filter-btn" data-filter="3d"><span class="i18n-en-inline">3D Art</span><span class="i18n-lv-inline">3D Māksla</span></button>
+      <button class="filter-btn" data-filter="mixed"><span class="i18n-en-inline">Mixed Media</span><span class="i18n-lv-inline">Jauktu mediju darbi</span></button>
+      <button class="filter-btn" data-filter="web"><span class="i18n-en-inline">Immersive Web Environments</span><span class="i18n-lv-inline">Imersīvas tīmekļa vides</span></button>
+     <!---  <button class="filter-btn" data-filter="digital">Digital Paintings</button> -->
+      <button class="filter-btn" data-filter="traditional"><span class="i18n-en-inline">Traditional Art</span><span class="i18n-lv-inline">Gleznas</span></button>
+    </div>
+    <div class="Works-grid">
+
+<!-- ADD YOUR WORKS HERE -->
+
+ <!--The Endless Chase -->
+      <div class="Works-item" data-category="3d"
+        style="aspect-ratio:16/9; grid-column: span 1;"
+        data-title-en="&quot;The Endless Chase&quot; (3D animation, 15 sec, 1440x1440px, 2026)"
+        data-title-lv="&quot;Bezgalīgā pakaļdzīšanās&quot; (3D animācija, 15 sek, 1440x1440px, 2026)"
+        data-media='[""]'
+        data-youtube='["qzJbxJYXcNo"]'>
+        <div class="work-desc-en" hidden>
+          <p>"The Endless Chase" is a 3D animation created in Blender, featuring a duck chasing a drifting maple leaf along a river that winds around the globe.</p>
+        </div>
+        <div class="work-desc-lv" hidden>
+          <p>"Bezgalīgā pakaļdzīšanās" ir datorgrafikas programmā Blender veidota 3D animācija, kurā pīle dzenas pakaļ peldošai kļavas lapai pa upi, kas vijas apkārt visai zemeslodei.</p>
+        </div>
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1794429925/The-Endless-Chase_Thumbnail-2_menqbf.png" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+        <div class="Works-item-label"><span>3D Animation</span><strong>"The Endless Chase" (2026)</strong></div>
+      </div>
+
+ <!-- Bakalaurs -->
+      <div class="Works-item" data-category="mixed"
+        style="aspect-ratio:16/9; grid-column: span 1;"
+        data-title-en="&quot;Immersing in the Pool of Nostalgia&quot; (2026)"
+        data-title-lv="&quot;Iegrimstu nostalģijas baseinā&quot; (2026)"
+        data-media='[
+        {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1786899512/IMG_6029_vnqri3.png", "credit": "Dajana Jefremova"},
+        {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1786899530/IMG-10_z0vtpv.png", "credit": "Dajana Jefremova"},
+        {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1786899519/IMG-4_rvk3io.png", "credit": "Dajana Jefremova"},
+        {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1786899517/IMG-2_xnl7di.png", "credit": "Dajana Jefremova"},
+        {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1786899520/IMG-6_tbunu1.png", "credit": "Dajana Jefremova"},
+        {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1786899527/IMG-13_btoeum.png", "credit": "Dajana Jefremova"},
+        {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1786899523/IMG-9_ti9m0z.png", "credit": "Dajana Jefremova"},
+        {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1786899531/IMG-12_oayugg.png", "credit": "Dajana Jefremova"},
+        {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1786896654/R-15_uxekzg.png", "credit": "Anete Aramina"}
+        ]'
+        data-youtube='["0IHkZBr63Es"]'>
+        <div class="work-desc-en" hidden>
+          <p>The bachelor project “Immersed in a Pool of Nostalgia” is a mixed media installation that combines 3D animations with spatial elements. The center of the artwork is the swimming pool environment, which the author associates with childhood memories and emotionally saturated experiences. The swimming pool is analyzed in the work not only as a physical space, but also as an affective environment in which smell, sound, humidity, light, materiality and objects are able to activate nostalgic feelings. </p>
+          <p>The installation uses digitally created 3D animations, two CRT monitors, five older generation monitors, podiums with mosaic tile decoration, 3D printing and olfactory elements. The visual aesthetics of the work use references to the environment of earlier digital technologies, low-resolution images and the fragmentary nature of childhood memories.</p>
+          <p><em>The work was exhibited at the Riga Contemporary Art Space in the exhibition "Reset Factory Settings" (29.05. – 21.06.2026.)</em></p>
+        </div>
+        <div class="work-desc-lv" hidden>
+          <p>Bakalaura darbs “Iegrimstu nostalģijas baseinā” ir jauktu mediju instalācija, kurā apvienotas 3D animācijas ar telpiskiem elementiem. Mākslas darba centrā ir peldbaseina vide, kura autoram asociējas ar bērnības atmiņām un emocionāli piesātinātām pieredzēm. Peldbaseins darbā tiek analizēts ne tikai kā fiziska telpa, bet arī kā afektīva vide, kurā smarža, skaņa, mitrums, gaisma, materialitāte un objekti spēj aktivizēt nostalģiskas sajūtas.</p>
+          <p>Instalācijā izmantotas digitāli veidotas 3D animācijas, divi CRT monitori, pieci vecākas paaudzes monitori, podesti ar mozaīkflīžu apdari, 3D druka un ožas elementi. Darba vizuālajā estētikā tiek izmantotas atsauces uz agrāku digitālo tehnoloģiju vidi, zemas izšķirtspējas attēlu un bērnības atmiņu fragmentāro raksturu.</p>
+          <p><em>Darbs tika eksponēts Rīgas Laikmetīgās mākslas telpā izstādē "Reset Factory Settings" (29.05. – 21.06.2026.)</em></p>
+        </div>
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1786899512/IMG_6029_vnqri3.png" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+        <div class="Works-item-label"><span>Mixed Media</span><strong>&quot;Immersing in the Pool of Nostalgia&quot; (2026)</strong></div>
+      </div>
+
+<!-- Esmeralda -->
+      <div class="Works-item" data-category="3d"
+        style="aspect-ratio:16/9; grid-column: span 1;"
+        data-title-en="3D animation for advertisement (2026)"
+        data-title-lv="3D animācija priekš reklāmas (2026)"
+        data-media='[
+        "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1783641125/tYdffnS_opuldw.png", 
+        "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1783641127/xRbHXHC_fmcw9x.png", 
+        "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1783641126/Nz2fiCi_vicvus.png"
+        ]'
+        data-youtube='["gZKfEeNX-W8"]'>
+        <div class="work-desc-en" hidden>
+          <p>3D advertisement animation for the "Labietis" brewery's beverage – "Esmeralda" sparkling honey drink.</p>
+        </div>
+        <div class="work-desc-lv" hidden>
+          <p>3D reklāmas animācija alus darītavas "Labietis" dzērienam – Medus dzirkstene “Esmeralda”</p>
+        </div>
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1783642337/MD-R42_ripx0b.png" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+        <div class="Works-item-label"><span>3D Animation</span><strong>3D animation for advertisement (2026)</strong></div>
+      </div>
+
+<!-- OLA -->
+            <div class="Works-item" data-category="web"
+            style="aspect-ratio:16/9; grid-column: span 1;"
+            data-title-en="Ola Foundation– 3D Interactive Space (2026)"
+            data-title-lv="Ola Foundation – 3D interaktīvā telpa (2026)"
+           data-aframe-url="https://ray-3d.github.io/Portfolio/Aframe-Ola/">
+
+  <div class="work-desc-en" hidden>
+    <p>An immersive web space experience built with A-Frame.</p>
+    <p>Navigate through a 3D gallery space using WASD or arrow keys and mouse to look around. Hold SHIFT to move faster.</p>
+    <p>To start, press the left mouse button, and to exit – ESC button.</p>
+    <p>On mobile – hold 1 finger to go forward, hold 2 fingers to go backward.</p>
+  </div>
+
+  <div class="work-desc-lv" hidden>
+    <p>Imersīva tīmekļa vides pieredze, veidota ar A-Frame.</p>
+    <p>Pārvietojieties pa 3D galerijas telpu, izmantojot WASD vai bultiņu taustiņus un peli, lai skatītos apkārt. Turi SHIFT pogu, lai kustētos ātrāk.</p>
+    <p>Lai sāktu uzspied peles kreiso taustiņu, un lai izietu – ESC pogu.</p>
+    <p>Mobilajā ierīcē – turiet nospiestu 1 pirkstu, lai kustētos uz priekšu, un 2 pirkstus, lai kustētos atpakaļgaitā.</p>
+  </div>
+
+  <!-- Upload a thumbnail to Cloudinary -->
+  <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1783702223/Ola-viewport-R12_olorox.png" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+  
+  <div class="Works-overlay"><i class="ti ti-player-play Works-overlay-icon"></i></div>
+  <div class="Works-item-label"><span>Immersive Web Environment</span><strong>OLA Foundation – Interactive Space (2026)</strong></div>
+</div>
+
+<!-- 3D printed CRT TV -->
+      <div class="Works-item" data-category="mixed"
+        style="aspect-ratio:16/9; grid-column: span 1;"
+        data-title-en="Artist Book (2025)"
+        data-title-lv="Artist Book (2025)"
+        data-media='[
+         {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1783640948/WNEvnm8_ev8n4y.jpg", "credit": "Laima Kalniņa"},
+         {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1783640948/fOwzveh_uhi15u.jpg", "credit": "Laima Kalniņa"},
+         {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1783640948/Fm6jdlf_pumzoy.jpg", "credit": "Raimonds Krastiņš"},
+         {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1783640948/S8ubYQy_ozu4l5.jpg", "credit": "Raimonds Krastiņš"},
+         {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1789335118/copy_of_eatvtpv_moqzps.jpg", "credit": "Raimonds Krastiņš"}
+        ]'
+        >
+        <div class="work-desc-en" hidden>
+          <p>The work is designed as a spatial “artist book” format, using a 3D printed CRT television object that refers to the visual and technological environment of the author’s childhood. The television body serves as a framework for interchangeable lithophane 3D printed plates depicting the PlayStation video games played during childhood. In the process of creating the images, the game covers were deliberately moved during scanning, creating a blurred, deformed visuality that conceptually resonates with fragmented and subjectively transformed memories.</p>
+        </div>
+        <div class="work-desc-lv" hidden>
+          <p>Darbs veidots kā telpisks “artist book” formāts, izmantojot 3D printētu CRT televizora objektu, kas atsaucas uz autora bērnības vizuālo un tehnoloģisko vidi. Televizora korpuss kalpo kā ietvars maināmām lithophane tehnikā 3D printētām plāksnēm, kurās attēlotas bērnībā spēlētās PlayStation videospēles. Attēlu veidošanas procesā spēļu vāki tika apzināti kustināti skenēšanas laikā, radot izplūdušu, deformētu vizualitāti, kas konceptuāli sasaucas ar fragmentārām un subjektīvi transformētām atmiņām.</p>
+        </div>
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1789335118/copy_of_eatvtpv_moqzps.jpg" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+        <div class="Works-item-label"><span>Mixed Media</span><strong>Artist Book (2025)</strong></div>
+      </div>
+
+<!-- Public Swimming Pool Tiles -->
+      <div class="Works-item" data-category="mixed"
+        style="aspect-ratio:16/9; grid-column: span 1;"
+        data-title-en="&quot;Public Swimming Pool Tiles&quot; (2025)"
+        data-title-lv="&quot;Publiskā peldbaseina flīzes&quot; (2025)"
+        data-media='[
+         {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1789859763/X40A0067-1_neubzv.jpg", "credit": "Laima Kalniņa"},
+         {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1789854943/20251204_115805_dyxcyh.jpg", "credit": "Raimonds Krastiņš"},
+         {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1789854942/20251204_115734_cw3cqy.jpg", "credit": "Raimonds Krastiņš"},
+         {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1789854943/20251204_115827_l83vqn.jpg", "credit": "Raimonds Krastiņš"},
+         {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1789854942/20251204_115751_a9avst.jpg", "credit": "Raimonds Krastiņš"}
+        ]'
+        >
+        <div class="work-desc-en" hidden>
+          <p>The work is conceived as an intentionally unaesthetic interpretation of swimming pool tiles, with 
+            elements integrated into the surface that are typically perceived as undesirable or repulsive – hair, 
+            fingernails, eyelashes, slimy deposits, and moss.</p>
+          <p>The work explores the position of “bad” or “disgusting” art within the contemporary aesthetic field, 
+            while simultaneously critically reflecting on the culture of luxury design. The tiles are conceived as 
+            a hypothetical commission by an aristocrat – as an object that demonstrates status through an extreme, 
+            seemingly repulsive visual solution. In this way, the work ironizes the mechanisms through which exclusivity 
+            is created, suggesting that distinction can be achieved not through beauty, but through a radically 
+            aestheticized sense of repulsion.</p>
+        </div>
+        <div class="work-desc-lv" hidden>
+          <p>Darbs veidots kā izteikti neestētiska peldbaseina flīžu interpretācija, kuras virsmā 
+          integrēti elementi, kas parasti tiek uztverti kā nevēlami vai atgrūdoši – mati, nagi, skropstas,
+          gļotaini nosēdumi un sūnas.</p>
+          <p>Darbs pēta “sliktas” vai “pretīgas” mākslas pozīciju mūsdienu estētiskajā laukā,
+          vienlaikus kritiski reflektējot par luksusa dizaina kultūru. Flīzes tiek interpretētas kā
+          hipotētisks augstmaņu pasūtījums – kā objekts, kas demonstrē statusu, izmantojot
+          ekstrēmu, it kā atgrūdošu vizuālo risinājumu. Šādā veidā darbs ironizē par ekskluzivitātes
+          radīšanas mehānismiem, kur atšķiršanās tiek panākta nevis ar skaistumu, bet ar radikālu
+          estetizētu nepatiku.</p>
+        </div>
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1789854943/20251204_115805_dyxcyh.jpg" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+        <div class="Works-item-label"><span>Mixed Media</span><strong>Public Swimming Pool Tiles (2025)</strong></div>
+      </div>
+
+      <!-- BENEATH THE WATER LEVEL -->
+      <div class="Works-item" data-category="3d"
+        style="aspect-ratio:16/9; grid-column: span 1;"
+        data-title-en="&quot;Beneath the Water Level&quot; (2025)"
+        data-title-lv="&quot;Zem ūdens līmeņa&quot; (2025)"
+        data-media='[
+        {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1783641129/pV2t5bP_lzsngp.jpg", "credit": "Raimonds Krastiņš"},
+        {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1783641128/zHdgvgO_abn8bw.jpg", "credit": "Raimonds Krastiņš"},
+        {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1783641125/6jUB5vh_ppsrwr.jpg", "credit": "Raimonds Krastiņš"},
+        {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1783641124/bys11I5_wvnev9.jpg", "credit": "Raimonds Krastiņš"}
+        ]'
+        data-youtube='["bwcSmNVRyy4"]'>
+        <div class="work-desc-en" hidden>
+          <p>A 3D animation created in Blender using liquid simulation.</p>
+          <p>A site-specific 3D animation created for the group exhibition "Virzienmaiņas" ("Shifts"). The work presents a speculative scenario in which the Daugava briefly alters its course and enters the Riga Contemporary Art Space.</p>
+          <p>Using a digitally reconstructed model of the gallery and Blender's fluid simulation system, the work visualizes water rushing down the entrance stairs and gradually transforming the familiar interior into an unfamiliar landscape.</p>
+        </div>
+        <div class="work-desc-lv" hidden>
+          <p>3D animācija veidota Blender programmā, izmantojot šķidruma simulāciju.</p>
+          <p>Vietas specifiska 3D animācija, radīta grupu izstādei "Virzienmaiņas". Darbs piedāvā spekulatīvu scenāriju, kurā Daugava uz brīdi maina savu tecējumu un ieplūst Rīgas Laikmetīgās mākslas telpā.</p>
+          <p>Izmantojot digitāli rekonstruētu galerijas modeli un Blender šķidruma simulācijas sistēmu, darbs vizualizē ūdeni, kas plūst pa ieejas kāpnēm un pakāpeniski pārveido pazīstamo interjeru svešā ainavā.</p>
+        </div>
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1783641433/room20276_vg7n8p.png" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+        <div class="Works-item-label"><span>3D Animation</span><strong>"Beneath the Water Level" (2025)</strong></div>
+      </div>
+
+<!-- WEAVING -->
+      <div class="Works-item" data-category="3d"
+        style="aspect-ratio:16/9; grid-column: span 1;"
+        data-title-en="Weaving and logo animation (2025)"
+        data-title-lv="Aušana un logo animācija (2025)"
+        data-media='[""]'
+        data-youtube='["72PloNfSJec"]'>
+        <div class="work-desc-en" hidden>
+          <p>Created as a 3D computer graphics coursework at the Art Academy of Latvia. A procedural animation exploring fabric simulation using the Blender Geometry Nodes system. The project visualizes the process of weaving a denim-like material and sewing a logo onto the surface.</p>
+        </div>
+        <div class="work-desc-lv" hidden>
+          <p>Izveidots kā 3D datorgrafikas kursa darbs Latvijas Mākslas akadēmijā. Procedurāla animācija, kas pēta auduma simulāciju, izmantojot Blender Geometry Nodes sistēmu. Projekts vizualizē džinsam līdzīga materiāla aušanas un logotipa uzšūšanas procesu uz virsmas.</p>
+        </div>
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1783640131/vlcsnap-2026-06-23-19h36m04s692_r5kmz5.png" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+        <div class="Works-item-label"><span>3D Animation</span><strong>Weaving and logo animation (2025)</strong></div>
+      </div>
+
+      <!-- KNITTING -->
+      <div class="Works-item" data-category="3d"
+        style="aspect-ratio:16/9; grid-column: span 1;"
+        data-title-en="Knitting animation (2025)"
+        data-title-lv="Adīšana animācija (2025)"
+        data-media='[""]'
+        data-youtube='["tKKfDHiaAAw"]'>
+        <div class="work-desc-en" hidden>
+          <p>Created as a 3D computer graphics coursework at the Art Academy of Latvia. 3D animation exploring knitting simulation using Blender Geometry Nodes system.</p>
+          
+        </div>
+        <div class="work-desc-lv" hidden>
+          <p>Izveidots kā 3D datorgrafikas kursa darbs Latvijas Mākslas akadēmijā. 3D animācija, kurā aplūkota adīšanas simulācija, izmantojot Blender Geometry Nodes sistēmu.</p>
+          
+        </div>
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1783640134/vlcsnap-2026-06-23-19h36m40s517_bzepnw.png" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+        <div class="Works-item-label"><span>3D Animation</span><strong>Knitting animation (2025)</strong></div>
+      </div>
+
+<!-- FURBALL -->
+      <div class="Works-item" data-category="3d"
+        style="aspect-ratio:16/9; grid-column: span 1;"
+        data-title-en="&quot;Furball&quot; (2025)"
+        data-title-lv="&quot;Furball&quot; (2025)"
+        data-media='[""]'
+        data-youtube='["of7wESp2o6s"]'>
+        <div class="work-desc-en" hidden>
+          <p>A 3D animation created in Blender using Geometry nodes.</p>
+        </div>
+        <div class="work-desc-lv" hidden>
+          <p>3D animācija veidota Blender programmā, izmantojot Geometry nodes.</p>
+        </div>
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1783641595/0123_ola5vx.png" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+        <div class="Works-item-label"><span>3D Animation</span><strong>Furball (2025)</strong></div>
+      </div>
+
+      <!-- Character animation -->
+      <div class="Works-item" data-category="3d"
+        style="aspect-ratio:16/9; grid-column: span 1;"
+        data-title-en="Character animation (2025)"
+        data-title-lv="Tēla animācija (2025)"
+        data-media='[""]'
+        data-youtube='["28XZ9q4bESw"]'>
+        <div class="work-desc-en" hidden>
+          <p>A character animation exercise inspired by a viral video of an airport security drill in China. The animation recreates and interprets the movements and interactions seen in the original footage, focusing on timing, body mechanics, and character performance.</p>
+          <p>Created as a 3D computer graphics coursework at the Art Academy of Latvia, the project explores rigging and armature-based animation techniques, with particular attention to character movement and interaction between multiple figures.</p>
+        </div>
+        <div class="work-desc-lv" hidden>
+          <p>Tēlu animācijas vingrinājums, kas iedvesmots no populāra video par lidostas drošības mācībām Ķīnā. Animācija atjauno un interpretē kustības un mijiedarbību, kas redzama oriģinālajā video, koncentrējoties uz laiku, ķermeņa mehāniku un tēlu performanci.</p>
+          <p>Projekts, kas veidots kā 3D datorgrafikas kursa darbs Latvijas Mākslas akadēmijā, pēta 3D rīgošanu un uz armatūras balstītas animācijas tehnikas, īpašu uzmanību pievēršot tēlu kustībai un mijiedarbībai starp vairākiem tēliem.</p>
+        </div>
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1783640127/vlcsnap-2026-06-23-19h35m20s117_ufuk8r.png" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+        <div class="Works-item-label"><span>3D Animation</span><strong>Character animation (2025)</strong></div>
+      </div>
+
+      <!-- Armature animations -->
+      <div class="Works-item" data-category="3d"
+        style="aspect-ratio:16/9; grid-column: span 1;"
+        data-title-en="Armature animations (2024-2025)"
+        data-title-lv="Kaulu animācijas (2024-2025)"
+        data-media='[""]'
+        data-youtube='["va_lyA3rCmY"]'>
+        <div class="work-desc-en" hidden>
+          <p>Character animation exercises created as a 3D computer graphics coursework at the Art Academy of Latvia. The assignments focused on armature-based animation, exploring character movement, timing, and interaction with objects.</p>
+        </div>
+        <div class="work-desc-lv" hidden>
+          <p>Tēlu animācijas vingrinājumi, kas izveidoti kā 3D datorgrafikas kursa darbs Latvijas Mākslas akadēmijā. Uzdevumi bija vērsti uz armatūrām balstītu animāciju, pētot tēlu kustību, laiku un mijiedarbību ar objektiem.</p>
+        </div>
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1783640125/vlcsnap-2026-06-23-17h00m02s335_y2bybu.png" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+        <div class="Works-item-label"><span>3D Animation</span><strong>Armature animations (2024-2025)</strong></div>
+      </div>
+
+      <!-- Facial Expression Study -->
+      <div class="Works-item" data-category="3d"
+        style="aspect-ratio:16/9; grid-column: span 1;"
+        data-title-en="Facial Expression Study (2024)"
+        data-title-lv="Sejas mīmika (2024)"
+        data-media='[""]'
+        data-youtube='["WgH30_6ZwdU"]'>
+        <div class="work-desc-en" hidden>
+          <p>Created as a 3D computer graphics coursework at the Latvian Academy of Arts, this project explores facial animation using a custom 3D character model. The animation is based on the iconic facial expressions of Patrick Bateman (American Psycho, 2000), serving as a reference for studying subtle emotional shifts and non-verbal communication.</p>
+        </div>
+        <div class="work-desc-lv" hidden>
+          <p>Šis projekts, kas izveidots kā 3D datorgrafikas kursa darbs Latvijas Mākslas akadēmijā, pēta sejas izteiksmes animāciju, izmantojot pielāgotu 3D tēla modeli. Animācija ir balstīta uz Patrika Beitmena (Amerikāņu psihopāts, 2000) ikoniskajām sejas izteiksmēm, kas kalpo kā atsauce smalku emocionālu maiņu un neverbālās komunikācijas izpētei.</p>
+        </div>
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1783640132/vlcsnap-2026-06-23-19h35m39s678_cpwv4x.png" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+        <div class="Works-item-label"><span>3D Animation</span><strong>Facial Expression Study (2024)</strong></div>
+      </div>
+
+            <!-- rigas birzha -->
+            <div class="Works-item" data-category="web"
+            style="aspect-ratio:16/9; grid-column: span 1;"
+            data-title-en="Art Museum RIGA BOURSE – 3D Interactive Space (2025)"
+            data-title-lv="Mākslas muzejs RĪGAS BIRŽA – 3D interaktīvā telpa (2025)"
+           data-aframe-url="https://ray-3d.github.io/Portfolio/Rigas-birza-rework/">
+
+  <div class="work-desc-en" hidden>
+    <p>An immersive web space experience built with A-Frame.</p>
+    <p>Navigate through a 3D gallery space using WASD or arrow keys and mouse to look around. Hold SHIFT to move faster.</p>
+    <p>To start, press the left mouse button, and to exit – ESC button.</p>
+    <p>On mobile – hold 1 finger to go forward, hold 2 fingers to go backward.</p>
+  </div>
+
+  <div class="work-desc-lv" hidden>
+    <p>Imersīva tīmekļa vides pieredze, veidota ar A-Frame.</p>
+    <p>Pārvietojieties pa 3D galerijas telpu, izmantojot WASD vai bultiņu taustiņus un peli, lai skatītos apkārt. Turi SHIFT pogu, lai kustētos ātrāk.</p>
+    <p>Lai sāktu uzspied peles kreiso taustiņu, un lai izietu – ESC pogu.</p>
+    <p>Mobilajā ierīcē – turiet nospiestu 1 pirkstu, lai kustētos uz priekšu, un 2 pirkstus, lai kustētos atpakaļgaitā.</p>
+  </div>
+
+  <!-- Upload a thumbnail to Cloudinary -->
+  <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1783709485/izstaades-render-04_tscdll.png" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+  
+  <div class="Works-overlay"><i class="ti ti-player-play Works-overlay-icon"></i></div>
+  <div class="Works-item-label"><span>Immersive Web Environment</span><strong>Art Museum RIGA BOURSE – Interactive Space (2025)</strong></div>
+</div>
+
+      <!-- Staro Rīga -->
+      <div class="Works-item" data-category="mixed"
+        style="aspect-ratio:16/9; grid-column: span 1;"
+        data-title-en="The Light Festival &quot;Staro Rīga&quot; (2024)"
+        data-title-lv="Gaismas festivāls &quot;Staro Rīga&quot; (2024)"
+        data-media='[
+        {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1783641129/NtoQqwf_xbzoko.jpg", "credit": "Raimonds Krastiņš"},
+        {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1789342086/aaa_ccjwa4.png", "credit": "Raimonds Krastiņš"},
+        {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1783641129/YyW1Uwp_xipvxg.jpg", "credit": "Raimonds Krastiņš"}
+        ]'
+        data-youtube='["y4qQRz8uTlg", "h5-e7p_tGXU"]'>
+        <div class="work-desc-en" hidden>
+          <p>&quot;MOMENT OF THE SUN&quot;</p>
+            <p>The work reproduces the moment when the Sun sets below the horizon. The Sun is made of a shiny hemisphere so that, reflecting of the base, it takes on the form of a full sphere. The hemisphere of light illustrates the moment when sun has not yet fully set below the horizon. The Sun is caught at sunset with the idea that it continues to illuminate Riga even in the dark when the real Sun has set and is unable to share its shine. The light lines creating stylized reflections on the surface of water surface, are like the positive inertia of a moment. The ribbons of light emit light in a wave-like rhythm from the centre of the object, where the hemisphere is located. The light changes in the spectrum of warm tones observed during sunset.</p>
+          <p>&quot;ANNUAL RINGS&quot;</p>
+            <p>The work reflects the annual rings of a tree. If the annual rings of a tree trunk with their light and dark layers of varying thickness show the past of the tree’s growth, then this object of art with its lines of light points to a bright future and potential growth.</p>
+          <p> . . . . . </p>
+          <p>Object location: Victory park (Uzvaras parks)</p>
+          <p>Author of the project ideas: Raimonds Krastiņš</p>
+          <p>Projects implementer: Art academy of Latvia</p>
+          <p>Projects financier: Riga City Municipality</p>
+        </div>
+        <div class="work-desc-lv" hidden>
+          <p>&quot;SAULES MIRKLIS&quot;</p>
+            <p>Darbs atspoguļo mirkli, kad Saule aiziet aiz horizonta. Saule veidota no spīdošas puslodes tā, lai, atspīdot pamatnē, veidojas pilna lode. Gaismas puslode ataino to, ka moments noķerts pusstadijā. Saule noķerta saulrieta brīdī ar domu, ka tā turpina izgaismot Rīgu arī tumšajā laikā – periodā, kad īstā Saule ir norietējusi un nespēj dot savu spožumu. Gaismas līnijas, kas veido stilizētus atspīdumus ūdens virsmā, ir kā mirkļa pozitīvā inerce gaismas laikā. Gaismas lentas izstaro gaismu viļņveidīgā ritmā no objekta centra, kur atrodas puslode. Gaismas gan puslodei, gan līnijām mainās krāsas silto toņu spektrā – krāsās, ko var novērot saulē, mākoņos un debesīs saulrieta laikā.</p>
+          <p>&quot;GADSKĀRTAS&quot;</p>
+            <p>Darbs atspoguļo koka gadskārtas. Ja koka stumbrā gadskārtas ar savām dažada biezuma gaišajiem un tumšajiem slāņiem parāda koka augšanas pagātni, tad šis mākslas objekts ar gaismas līnijām vēsta par gaišu nākotni un par potenciālu izaugsmi.</p>
+          <p> . . . . . </p>
+          <p>Objekta lokācija: Uzvaras parks</p>
+          <p>Projektu ideju autors: Raimonds Krastiņš</p>
+          <p>Projektu realizētājs: Latvijas Mākslas akadēmija</p>
+          <p>Projektu finansētājs: Rīgas valstspilsētas pašvaldība</p>
+        </div>
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1783641829/staroriga2024_vl42zs.png" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+        <div class="Works-item-label"><span>Mixed Media</span><strong>The Light Festival "Staro Rīga" (2024)</strong></div>
+      </div>
+
+      <!-- FIRE -->
+      <div class="Works-item" data-category="3d"
+        style="aspect-ratio:16/9; grid-column: span 1;"
+        data-title-en="Fire and smoke simulation (2024)"
+        data-title-lv="Uguns un dūmu simulācija (2024)"
+        data-media='["https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1783640105/fire-alarm-11_jckmir.png"]'
+        data-youtube='["nvTMds0Ppd8"]'>
+        <div class="work-desc-en" hidden>
+          <p>Created as a 3D computer graphics coursework at the Art Academy of Latvia, this project explores fire and smoke simulation techniques in Blender. The animation presents an ironic scenario in which a fire alarm button itself is on fire.</p>
+          
+        </div>
+        <div class="work-desc-lv" hidden>
+          <p>Šis projekts, kas izveidots kā 3D datorgrafikas kursa darbs Latvijas Mākslas akadēmijā, pēta uguns un dūmu simulācijas tehnikas programmā Blender. Animācijā ir attēlots ironisks scenārijs, kurā deg pati ugunsgrēka trauksmes poga.</p>
+          
+        </div>
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1783640126/vlcsnap-2026-06-23-19h33m44s877_y6im6m.png" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+        <div class="Works-item-label"><span>3D Animation</span><strong>Fire and smoke simulation (2024)</strong></div>
+      </div>
+
+ <!-- LMA floods -->
+      <div class="Works-item" data-category="3d"
+        style="aspect-ratio:16/9; grid-column: span 1;"
+        data-title-en="&quot;I Flooded the Hallway of the Art Academy of Latvia&quot; (2024)"
+        data-title-lv="&quot;Es nopludināju Latvijas Mākslas akadēmijas gaiteni&quot; (2024)"
+        data-media='["https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1783639747/udens-telpa-25_bqyfnu.png"]'
+        data-youtube='["J99PXTI0MLk"]'>
+        <div class="work-desc-en" hidden>
+          <p>Created as a 3D computer graphics coursework at the Art Academy of Latvia, this project explores fluid simulation techniques in Blender. The animation presents a fictional scenario in which water floods one of the academy's hallways.</p>
+          <p>The hallway was captured using photogrammetry and reconstructed as a 3D model in RealityCapture before being imported into Blender.</p>
+        </div>
+        <div class="work-desc-lv" hidden>
+          <p>Šis projekts, kas izveidots kā 3D datorgrafikas kursa darbs Latvijas Mākslas akadēmijā, pēta šķidruma simulācijas tehnikas programmā Blender. Animācijā ir attēlots izdomāts scenārijs, kurā ūdens applūst vienā no akadēmijas gaiteņiem.</p>
+          <p>Gaitenis tika uzņemts, izmantojot fotogrammetriju, un rekonstruēts kā 3D modelis programmā RealityCapture, pirms importēšanas programmā Blender.</p>
+        </div>
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1783640130/vlcsnap-2026-06-23-19h34m02s223_k5vovi.png" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+        <div class="Works-item-label"><span>3D Animation</span><strong>"I Flooded the Hallway of the Art Academy of Latvia" (2024)</strong></div>
+      </div>
+
+      <!-- AR -->
+      <div class="Works-item" data-category="3d"
+        style="aspect-ratio:16/9; grid-column: span 1;"
+        data-title-en="Augmented Reality projects (2024)"
+        data-title-lv="Papildinātās realitātes projekti (2024)"
+        data-media='[""]'
+        data-youtube='["YNGXcgi1CNI"]'>
+        <div class="work-desc-en" hidden>
+          <p>As a member of the painting augmented reality working group, I contributed augmented reality content for the exhibition Valdim Bušam 100. Savienojums. The project expanded selected paintings by Latvian artist Valdis Bušs through digital animation, allowing visitors to experience additional visual layers using the Overly augmented reality application.</p>
+          <p>The AR animations were created in Blender and integrated into the Overly platform, where they could be viewed through a mobile device as extensions of the original artworks. By combining traditional painting with digital media, the project explored new ways of engaging with cultural heritage and exhibition spaces.</p>
+          <p>Works featuring the augmented reality content were exhibited as part of Valdim Bušam 100. Savienojums and were later presented at the National Museum of Fine Arts of Moldova.</p>
+            
+        </div>
+        <div class="work-desc-lv" hidden>
+          <p>Kā gleznas papildinātās realitātes darba grupas dalībnieks es veidoju paplašinātās realitātes saturu izstādei “Valdim Bušam 100. Savvienojums”. Projekts paplašināja atlasītas latviešu mākslinieka Valda Buša gleznas, izmantojot digitālo animāciju, ļaujot apmeklētājiem izjust papildu vizuālos slāņus, izmantojot papildinātās realitātes aplikāciju Overly.</p>
+          <p>AR animācijas tika izveidotas programmā Blender un integrētas Overly platformā, kur tās varēja skatīt mobilajā ierīcē kā oriģinālo mākslas darbu papildinajumus. Apvienojot tradicionālo glezniecību ar digitālajiem medijiem, projekts pētīja jaunus veidus, kā iesaistīties kultūras mantojumā un izstāžu telpu izmantošanā.</p>
+          <p>Darbi ar papildinātās realitātes saturu tika izstādīti Valdim Bušam 100. Savvienojums ietvaros un vēlāk tika prezentēti Moldovas Nacionālajā mākslas muzejā.</p>
+        </div>
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1789343016/vlcsnap-2026-09-14-02h34m18s794_qiocbw.png" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+        <div class="Works-item-label"><span>3D Animation</span><strong>Augmented Reality projects (2024)</strong></div>
+      </div>
+
+            <!-- Paintings 2024 1/2 -->
+      <div class="Works-item" data-category="traditional"
+        style="aspect-ratio:16/9; grid-column: span 1;"
+        data-title-en="Paintings 2024 1/2"
+        data-title-lv="Gleznas 2024 1/2"
+        data-media='[
+          {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1783641898/wowpr2_zmegbt.png", "credit": "Raimonds Krastiņš"},
+          {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1783641888/bb-pr2_quh9w9.png", "credit": "Raimonds Krastiņš"},
+          {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1783641891/what4_rpeavp.png", "credit": "Raimonds Krastiņš"},
+          {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1783641873/sar-pr2_iv50bt.png", "credit": "Raimonds Krastiņš"},
+          {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1783641887/aa4_dfd9hq.png", "credit": "Raimonds Krastiņš"},
+          {"src": "https://res.cloudinary.com/cgope2r2/image/upload/w_1920,q_auto,f_auto/v1783641964/20240507_192243-3_jhzcyp.jpg", "credit": "Raimonds Krastiņš"}
+        ]'
+        >
+        <div class="work-desc-en" hidden>
+          <p>Paintings created in 2024 at the Art Academy of Latvia during the 4th semester.</p>
+        </div>
+        <div class="work-desc-lv" hidden>
+          <p>Gleznas, kas tapušas 2024. gadā Latvijas Mākslas akadēmijā 4. semestra laikā.</p>
+        </div>
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1783641964/20240507_192243-3_jhzcyp.jpg" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+        <div class="Works-item-label"><span>Traditional Art</span><strong>Paintings 2024 1/2</strong></div>
+      </div>
+
+      <!--Time is running out -->
+      <div class="Works-item" data-category="3d"
+        style="aspect-ratio:16/9; grid-column: span 1;"
+        data-title-en="&quot;Time is running out&quot; (2024)"
+        data-title-lv="&quot;Laiks skrien&quot; (2024)"
+        data-media='[""]'
+        data-youtube='["Zw8LtzJH2Ec"]'>
+        <div class="work-desc-en" hidden>
+          <p>This 3D animation, created in Blender, features an inanimate object – a clock, that suddenly comes to life and starts running. The animation explores how movement can bring a sense of life and character to an otherwise static object.</p>
+        </div>
+        <div class="work-desc-lv" hidden>
+          <p>Šajā 3D animācijā, kas veidota programmā Blender, attēlots nedzīvs objekts – pulkstenis, kurš sāk kustēties un „skriet”. Animācijas mērķis ir piešķirt inanimētam objektam dzīvīgumu un kustības sajūtu.</p>
+        </div>
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1789860868/0436_uquulm.png" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+        <div class="Works-item-label"><span>3D Animation</span><strong>"Time is running out" (2024)</strong></div>
+      </div>
+
+      <!-- Camera tracking BOTH -->
+      <div class="Works-item" data-category="3d"
+        style="aspect-ratio:16/9; grid-column: span 1;"
+        data-title-en="Camera tracking (2024)"
+        data-title-lv="Kameras kustības izsekošana (2024)"
+        data-media='[""]'
+        data-youtube='["pVVNAjkXkxs", "j-PSqpVyK_M"]'>
+        <div class="work-desc-en" hidden>
+          <p>Created as a 3D computer graphics coursework at the Art Academy of Latvia, this project explores camera tracking in Blender.</p>
+        </div>
+        <div class="work-desc-lv" hidden>
+          <p>Šis projekts, kas izveidots kā 3D datorgrafikas kursa darbs Latvijas Mākslas akadēmijā, pēta kameras kustības izsekošanu programmā Blender.</p>
+        </div>
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1783640134/vlcsnap-2026-06-23-19h37m11s713_bnkhaf.png" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+        <div class="Works-item-label"><span>3D Animation</span><strong>Camera tracking (2024)</strong></div>
+      </div>
+
+<!--Air dancers in the forest -->
+      <div class="Works-item" data-category="3d"
+        style="aspect-ratio:16/9; grid-column: span 1;"
+        data-title-en="&quot;Air dancers in the forest&quot; (2024)"
+        data-title-lv="&quot;Gaisa dejotāji mežā&quot; (2024)"
+        data-media='[""]'
+        data-youtube='["xk3nXVk4Xp8"]'>
+        <div class="work-desc-en" hidden>
+          <p>Created as a 3D computer graphics coursework at the Art Academy of Latvia, this project explores cloth simulation in Blender.</p>
+        </div>
+        <div class="work-desc-lv" hidden>
+          <p>Šis projekts, kas izveidots kā 3D datorgrafikas kursa darbs Latvijas Mākslas akadēmijā, pēta auduma simulāciju programmā Blender.</p>
+        </div>
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1783640134/vlcsnap-2026-06-23-19h34m26s647_tuckwm.png" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+        <div class="Works-item-label"><span>3D Animation</span><strong>Air dancers in the forest (2024)</strong></div>
+      </div>
+
+      <!-- Fishies0001.mp4 -->
+      <div class="Works-item" data-category="3d"
+        style="aspect-ratio:16/9; grid-column: span 1;"
+        data-title-en="&quot;Fishies0001.mp4&quot;  (2023)"
+        data-title-lv="&quot;Fishies0001.mp4&quot;  (2023)"
+        data-media='[""]'
+        data-youtube='["rhmGOgYMe1A"]'>
+        <div class="work-desc-en" hidden>
+          <p>This surreal scene, inspired by the aesthetic of Studio Ghibli and featuring fish swimming through the sky, was digitally created in Blender. Fish were 3D modeled and animated following Ian Hubert's "Lazy tutorial".</p>
+        </div>
+        <div class="work-desc-lv" hidden>
+          <p>Šī sirreālā, Ghibli studijas estētikas iedvesmotā aina ar debesīs peldošām zivīm tika digitāli veidota programmā Blender. Zivis tika 3D modelētas un animētas, izmantojot Ian Hubert “Lazy Tutorial” kā iedvesmu un pamatu darba procesā.</p>
+        </div>
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1788973221/copy_of_fishies0290_qhwtjr.png" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+        <div class="Works-item-label"><span>3D Animation</span><strong>"Fishies0001.mp4" (2023)</strong></div>
+      </div>
+
+            <!-- Moths -->
+      <div class="Works-item" data-category="3d"
+        style="aspect-ratio:16/9; grid-column: span 1;"
+        data-title-en="&quot;Moths&quot;  (2023)"
+        data-title-lv="&quot;Naktstauriņi&quot;  (2023)"
+        data-media='[""]'
+        data-youtube='["o-1xn0WhXng"]'>
+        <div class="work-desc-en" hidden>
+          <p>This scene with moths circling around a street lamp was digitally created in Blender. Moths were 3D modeled and animated following Ian Hubert's "Lazy tutorial".</p>
+        </div>
+        <div class="work-desc-lv" hidden>
+          <p>Šī aina ar naktstauriņiem, kas riņķo ap ielu laternu, tika digitāli izveidota programmā Blender. Naktstauriņi tika 3D modelētas un animētas, sekojot Iana Hūberta "Lazy tutorial".</p>
+        </div>
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1788974023/street-lamp-25_wmbpij.png" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+        <div class="Works-item-label"><span>3D Animation</span><strong>"Moths" (2023)</strong></div>
+      </div>
+
+        <!-- ROŽU DD -->
+     <div class="Works-item" data-category="3d"
+  style="aspect-ratio:16/9; grid-column: span 1;"
+  data-title-en="&quot;Old_Riga_street_1993_08_13.mp4&quot; (2022)"
+  data-title-lv="&quot;Vecrīgas_iela_1993_08_13.mp4&quot; (2022)"
+  data-media='[""]'
+  data-youtube='["4q-2JPkJvX4"]'>
+
+  <div class="work-desc-en" hidden>
+    <p>A 3D animation created in Blender.</p>
+    <p>My diploma project for Janis Rozentāls Art School, "Old_Riga_street_1993_08_13.mp4" explores a speculative vision of Riga shaped by Japanese cultural influences. The animation presents a digitally reconstructed street in Old Riga, transformed through elements of Japanese architecture.</p>
+    <p>The work asks the question, “What if Japanese culture had become a defining influence in Riga?” By reimagining a familiar Latvian environment under different historical and cultural circumstances, the project creates an alternative version of the city that feels both recognizable and foreign.</p>
+  </div>
+  <div class="work-desc-lv" hidden>
+    <p>3D animācija veidota Blender programmā.</p>
+    <p>Mans diplomprojekts, absolvējot Jaņa Rozentāla Mākslas skolu. "Vecrīgas_iela_1993_08_13.mp4" pēta spekulatīvu vīziju par Rīgu, kuru būtiski ietekmējusi Japānas kultūra. Animācijā attēlota digitāli rekonstruēta Vecrīgas iela, kas pārveidota, izmantojot Japānas arhitektūras elementus.</p>
+    <p>Darbā tiek uzdots jautājums: “Kā būtu, ja Japānas kultūra būtu kļuvusi par vienu no noteicošajām ietekmēm Rīgā?” Pārveidojot skatītājiem pazīstamu Latvijas pilsētvidi un ievietojot to citā kultūras kontekstā, tiek radīta alternatīva pilsētas versija, kas vienlaikus šķiet gan pazīstama, gan sveša.</p>
+  </div>
+  <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_600,q_auto,f_auto/v1783642154/Raimonds-Krastins-Diplomdarba-thumbnail_namjwl.png" alt="Image missing" style="width:100%; height:100%; object-fit:cover; display:block;" /> 
+  <div class="Works-overlay"><i class="ti ti-eye Works-overlay-icon"></i></div>
+  <div class="Works-item-label"><span>3D Animation</span><strong>Old_Riga_street_1993_08_13.mp4 (2022)</strong></div>
+</div>
+
+    </div><!-- end .Works-grid -->
+  </section>
+
+   <!-- ABOUT -->
+  <section id="about">
+    <div class="about-grid">
+
+      <!-- Column 1: Portrait -->
+      <div class="about-portrait">
+        <img src="https://res.cloudinary.com/cgope2r2/image/upload/w_900,q_auto,f_auto/v1783642206/Raimonds-Krastins-Portrets_gigf0a.png" alt="Artist portrait" style="width:100%; height:100%; object-fit:contain;" />
+      </div>
+
+      <!-- Column 2: Bio -->
+      <div>
+        <p class="about-eyebrow i18n-en">The artist</p>
+        <p class="about-eyebrow i18n-lv">Mākslinieks</p>
+        <h2 class="about-name"></h2>
+        <div class="about-bio">
+          <p class="i18n-en">Raimonds Krastiņš (2002) is a visual artist working primarily with 3D modelling and animation. Working in the 3D program Blender, he creates digital models, animations, and virtual environments, exploring world-building through both semi-realistic and stylized aesthetics. Occasionally his practice also extends into physical space through 3D printing and mixed media works, exploring the relationship between digital and physical forms.</p>
+          <p class="i18n-lv">Raimonds Krastiņš (2002) ir vizuālais mākslinieks, kurš galvenokārt strādā ar 3D modelēšanu un animāciju. Izmantojot 3D datorgrafikas programmu Blender, veido digitālas pasaules un animācijas gan daļēji reālistiskā, gan stilizētā estētikā. Viņa praksē būtiska ir interese par 3D vidi kā telpu eksperimentiem un alternatīvu pasauļu veidošanai, kas ļauj atkāpties no ikdienas realitātes.</p>
+          <p class="i18n-en">In 2022, Krastiņš graduated from the Janis Rozentāls Art School. In 2026, he received a Bachelor's degree in Environmental Art from the Art Academy of Latvia, where he is currently pursuing a Master's degree in the same field.</p>
+          <p class="i18n-lv">2022. gadā Raimonds Krastiņš absolvēja Jaņa Rozentāla Mākslas skolu. 2026. gadā viņš ieguva bakalaura grādu Latvijas Mākslas akadēmijas Vides mākslas apakšnozarē, kur šobrīd turpina studijas maģistra programmā tajā pašā jomā.</p>
+        </div>
+        <div class="about-tools-section">
+          <p class="about-eyebrow i18n-en">Primary Tools</p>
+          <p class="about-eyebrow i18n-lv">Galvenie rīki</p>
+          <div class="about-tags" id="tags-primary">
+            <span class="about-tag">Blender</span>
+            <span class="about-tag">Adobe Photoshop</span>
+            <span class="about-tag">Adobe Premiere Pro</span>
+            <span class="about-tag">Adobe Illustrator</span>
+          </div>
+        </div>
+        <div class="about-tools-section">
+          <p class="about-eyebrow i18n-en">Additional Experience</p>
+          <p class="about-eyebrow i18n-lv">Papildu pieredze</p>
+          <div class="about-tags" id="tags-additional">
+            <span class="about-tag">Unreal Engine</span>
+            <span class="about-tag">Reality Capture</span>
+            <span class="about-tag">TouchDesigner</span>
+            <span class="about-tag">Visual Studio Code</span>
+            <span class="about-tag">A-Frame (WebXR)</span>
+            <span class="about-tag">GitHub Desktop</span>
+            <span class="about-tag">Adobe After Effects</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 3: Stats + Exhibitions -->
+      <div>
+        <div class="about-stats">
+          <div class="about-stat">
+            <div class="about-stat-num">4+</div>
+            <div class="about-stat-label i18n-en">Years active</div>
+            <div class="about-stat-label i18n-lv">Aktīvie gadi</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">100+</div>
+            <div class="about-stat-label i18n-en">Works</div>
+            <div class="about-stat-label i18n-lv">Darbi</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">3</div>
+            <div class="about-stat-label i18n-en">Exhibitions</div>
+            <div class="about-stat-label i18n-lv">Izstādes</div>
+          </div>
+        </div>
+        <div class="about-tools-section">
+          <p class="about-eyebrow i18n-en">Exhibitions</p>
+          <p class="about-eyebrow i18n-lv">Izstādes</p>
+          </div>
+                <div class="about-exhibitions-list">
+            <p class="i18n-en">&nbsp;<i class="ti ti-corner-up-right"></i> 2026 – Group exhibition <b>"Reset Factory Settings"</b> – Riga, Latvia</p> 
+            <p class="i18n-lv">&nbsp;<i class="ti ti-corner-up-right"></i> 2026 – Grupas izstāde <b>"Atiestatīt rūpnīcas iestatījumus"</b> – Rīga, Latvija</p>
+            <!---  <p> <i class="ti ti-arrow-up-dashed"></i> </p> -->
+            <p class="i18n-en">&nbsp;<i class="ti ti-corner-up-right"></i> 2025 – Group exhibition <b>"Shifts"</b> – Riga, Latvia</p>
+            <p class="i18n-lv">&nbsp;<i class="ti ti-corner-up-right"></i> 2025 – Grupas izstāde <b>"Virzienmaiņas"</b> – Rīga, Latvija</p>
+          <!---  <p> <i class="ti ti-arrow-up-dashed"></i> </p> -->
+            <p class="i18n-en">&nbsp;<i class="ti ti-corner-up-right"></i> 2022/23 – Group exhibition <b>"Jam"</b> – Latvia, different locations </p>
+            <p class="i18n-lv">&nbsp;<i class="ti ti-corner-up-right"></i> 2022/23 – Grupas izstade <b>"Ievārījums"</b> – Latvija, dažādas lokācijas</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2 class="i18n-en">Get in touch</h2>
+        <h2 class="i18n-lv">Sazinies</h2>
+        <p class="i18n-en">Available for commissions &amp; collaborations</p>
+        <p class="i18n-lv">Pieejams pasūtījumiem un sadarbībai</p>
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><i class="ti ti-mail-filled" aria-hidden="true"></i></div>
+          <span class="contact-detail-text">rk.digitalprod@gmail.com</span>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><i class="ti ti-map-pin-filled" aria-hidden="true"></i></div>
+          <span class="contact-detail-text">Latvia</span>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><i class="ti ti-brand-instagram" aria-hidden="true"></i></div>
+          <a href="https://www.instagram.com/ray.cgi" target="_blank"
+   style="color:var(--ink-muted); text-decoration:none; transition:color 0.2s;"
+   onmouseover="this.style.color='var(--accent)'"
+   onmouseout="this.style.color='var(--ink-muted)'">@ray.cgi</a>
+        </div>
+
+<div class="contact-detail">
+          <div class="contact-detail-icon"><i class="ti ti-brand-tiktok" aria-hidden="true"></i></div>
+          <a href="https://www.tiktok.com/@rk_7eam" target="_blank"
+   style="color:var(--ink-muted); text-decoration:none; transition:color 0.2s;"
+   onmouseover="this.style.color='var(--accent)'"
+   onmouseout="this.style.color='var(--ink-muted)'">@rk_7eam</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Raimonds Krastiņš. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/ray.cgi" target="_blank"> <i class="ti ti-brand-instagram" aria-hidden="true"></i> Instagram</a>
+      <a href="https://www.tiktok.com/@rk_7eam" target="_blank"> <i class="ti ti-brand-tiktok" aria-hidden="true"></i> TikTok</a>
+    </div>
+  </footer>
+</div><!-- end .portfolio-root -->
+
+<!-- LIGHTBOX -->
+  <div id="lightbox">
+    <button id="lightbox-close">✕</button>
+    <button id="lightbox-lang" onclick="toggleLang()"><span class="i18n-en-inline">LV</span><span class="i18n-lv-inline">EN</span></button>
+    <div id="lightbox-inner">
+      <div id="lightbox-media"></div>
+      <div id="lightbox-info">
+        <h2 id="lightbox-title"></h2>
+        <div id="lightbox-desc"></div>
+      </div>
+       <div id="lightbox-photos"></div>
+    </div>
+  </div>
+
+<script>
+// Language state. Every translated piece of text already exists twice in the
+// HTML (an .i18n-en/.i18n-lv or .i18n-en-inline/.i18n-lv-inline pair, same
+// idea as the .work-desc-en/.work-desc-lv pattern used for work descriptions).
+// Switching language is just adding/removing a class on <body> — CSS does the
+// showing and hiding, so there's no text dictionary to keep in sync.
+let currentLang = 'en';
+
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'lv' : 'en';
+  document.body.classList.toggle('is-lv', currentLang === 'lv');
+
+  // if the lightbox is open, refresh it (updates the description language and
+  // the "Photo:"/"Foto:" credit label)
+  if (document.getElementById('lightbox').style.display === 'block' && window._activeLightboxItem) {
+    openLightbox(window._activeLightboxItem);
+  }
+}
+
+function showSection(id, link) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (link) link.classList.add('active');
+}
+
+// Filter
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.Works-item').forEach(item => {
+      item.style.display = (filter === 'all' || item.dataset.category === filter) ? '' : 'none';
+    });
+  });
+});
+
+// Lightbox — attach click handler to all Works items
+document.querySelectorAll('.Works-item').forEach(item => {
+  item.addEventListener('click', () => openLightbox(item));
+});
+
+function openLightbox(item) {
+  window._activeLightboxItem = item;
+
+  const descKey = currentLang === 'lv' ? '.work-desc-lv' : '.work-desc-en';
+  const descEl = item.querySelector(descKey);
+  const titleKey = currentLang === 'lv' ? 'titleLv' : 'titleEn';
+  const title = item.dataset[titleKey] || '';
+  const media = JSON.parse(item.dataset.media || '[]');
+  const youtubeIds = JSON.parse(item.dataset.youtube || '[]');
+  const aframeUrl = item.dataset.aframeUrl || '';
+
+    // Title: if it ends with a bracketed part, e.g. `"The Endless Chase" (3D animation, 15 sec, 1440x1440px, 2026)`,
+  // show the main title on the first line and the bracketed specs on a second, smaller line.
+  const titleEl = document.getElementById('lightbox-title');
+  titleEl.textContent = '';
+  const titleMatch = title.match(/^(.*?)\s*\(([^()]*)\)\s*$/);
+  if (titleMatch && titleMatch[1]) {
+    titleEl.appendChild(document.createTextNode(titleMatch[1]));
+    const specs = document.createElement('span');
+    specs.textContent = titleMatch[2];
+    specs.style.cssText = 'display: block; margin-top: 0.4rem; font-size: 14px; font-weight: 400; letter-spacing: 0.04em; color: var(--accent);';
+    titleEl.appendChild(specs);
+  } else {
+    titleEl.textContent = title;
+  }
+
+
+  // Description
+  const lightboxDesc = document.getElementById('lightbox-desc');
+  lightboxDesc.innerHTML = '';
+  if (descEl) {
+    descEl.querySelectorAll('p').forEach(p => {
+      if (!p.textContent.trim()) return;
+      const newP = document.createElement('p');
+      newP.innerHTML = p.innerHTML;
+      lightboxDesc.appendChild(newP);
+    });
+  }
+
+    // Videos / A-Frame go in #lightbox-media (top). Title + description follow,
+  // and the images/photos from data-media go in #lightbox-photos (below the description).
+  const container = document.getElementById('lightbox-media');
+  container.innerHTML = '';
+  const photos = document.getElementById('lightbox-photos');
+  photos.innerHTML = '';
+
+  // A-Frame projects
+  if (aframeUrl) {
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = 'position: relative; width: 100%; aspect-ratio: 16/9; margin-bottom: 1rem;';
+
+    const iframe = document.createElement('iframe');
+    iframe.src = aframeUrl;
+    iframe.style.cssText = 'width: 100%; height: 100%; border: none; border-radius: 4px;';
+    iframe.setAttribute('allow', 'xr-spatial-tracking; accelerometer; magnetometer; gyroscope');
+
+    const btn = document.createElement('button');
+    btn.textContent = 'Open Full Screen';
+    btn.style.cssText = 'position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.6); color: var(--accent); border: 0.5px solid var(--accent); padding: 8px 12px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; z-index: 10; font-family: inherit; transition: background 0.2s;';
+    btn.onmouseover = () => btn.style.background = 'rgba(0,0,0,0.8)';
+    btn.onmouseout = () => btn.style.background = 'rgba(0,0,0,0.6)';
+    btn.onclick = () => window.open(aframeUrl, '_blank');
+
+    wrapper.appendChild(iframe);
+    wrapper.appendChild(btn);
+    container.appendChild(wrapper);
+  }
+  // YouTube videos
+  if (youtubeIds && youtubeIds.length > 0) {
+    if (Array.isArray(youtubeIds)) {
+      youtubeIds.forEach(id => {
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${id}`;
+        iframe.style.cssText = 'width: 100%; aspect-ratio: 16/9; border: none; margin-bottom: 1rem;';
+        iframe.setAttribute('allowfullscreen', '');
+        container.appendChild(iframe);
+      });
+    } else {
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${youtubeIds}`;
+      iframe.style.cssText = 'width: 100%; aspect-ratio: 16/9; border: none; margin-bottom: 1rem;';
+      iframe.setAttribute('allowfullscreen', '');
+      container.appendChild(iframe);
+    }
+  }
+  // Other media (images, videos)
+  // Each entry in `media` can be either:
+  //   - a plain URL string (no credit shown), or
+  //   - an object like {"src": "https://...", "credit": "Jane Doe"} — the "Photo:"/"Foto:"
+  //     label is added automatically based on the current language, so `credit` should
+  //     just be the photographer's name
+  const hasRealMedia = media.some(m => (typeof m === 'string' ? m : m && m.src));
+  if (media && media.length > 0) {
+    media.forEach(entry => {
+      if (!entry) return;
+      const src = typeof entry === 'string' ? entry : entry.src;
+      const credit = typeof entry === 'object' ? entry.credit : null;
+      if (!src) return;
+
+      if (src.match(/\.(mp4|webm|mov)$/i)) {
+        const video = document.createElement('video');
+        video.src = src;
+        video.controls = true;
+        video.autoplay = true;
+        video.muted = true;
+        video.style.cssText = 'width: 100%; border: 0.5px solid var(--border); display: block;';
+        photos.appendChild(video);
+        if (credit) photos.appendChild(makeCredit(credit));
+        else { const spacer = document.createElement('div'); spacer.style.marginBottom = '1rem'; photos.appendChild(spacer); }
+      } else {
+        const img = document.createElement('img');
+        img.src = src;
+        img.style.cssText = 'width: 100%; display: block; border: 0.5px solid var(--border);';
+        photos.appendChild(img);
+        if (credit) photos.appendChild(makeCredit(credit));
+        else { const spacer = document.createElement('div'); spacer.style.marginBottom = '1rem'; photos.appendChild(spacer); }
+      }
+    });
+  }
+
+
+  if (!aframeUrl && (!youtubeIds || youtubeIds.length === 0) && !hasRealMedia) {
+    container.innerHTML = '<p style="color:var(--ink-dim); font-size:13px;">No media added yet.</p>';
+  }
+
+  document.getElementById('lightbox').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+// Small helper: builds the photographer-credit caption shown under a lightbox image.
+// `name` is just the photographer's name (e.g. "Raimonds Krastiņš") — the "Photo:"/"Foto:"
+// label is added here based on the current language.
+function makeCredit(name) {
+  const label = currentLang === 'lv' ? 'Foto' : 'Photo';
+  const p = document.createElement('p');
+  p.textContent = `${label}: ${name}`;
+  p.style.cssText = 'font-size: 13px; letter-spacing: 0.04em; color: var(--ink-dim); margin: 0.5rem 0 1.5rem; text-align: right;';
+  return p;
+}
+
+
+
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+  document.body.style.overflow = '';
+  document.getElementById('lightbox-media').innerHTML = '';
+  document.getElementById('lightbox-photos').innerHTML = '';
+  window._activeLightboxItem = null;
+}
+
+// Close lightbox with close button
+document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+
+// Close lightbox when clicking backdrop
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+
+// Close lightbox with Escape key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+});
+</script>
+
+</body>
+</html>

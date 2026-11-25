@@ -1,0 +1,138 @@
+<html>
+  <head>
+    <script src="components/aframe171.min.js"></script>
+    <script src="components/simple-navmesh-constraint.js"></script>
+    <script src="components/aframe-extras.js"></script>
+  </head>
+  <body>
+    <a-scene fog="type: exponential; color: #b3ffff; density: .029">
+      <!-- ----- -->
+      <!-- assets -->
+      <!-- ----- -->
+      <a-assets>
+         
+        <a-asset-item
+          id="gondola"
+          src="assets/Gondola-04.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="birza"
+          src="assets/RIGAS-BIRZA-bez-sliedem.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="birzas-caurumi"
+          src="assets/RIGAS-BIRZA-caurumi1.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="grida2"
+          src="assets/navmesh1.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="grida"
+          src="assets/navmesh-grida-03.obj"
+        ></a-asset-item>
+        <a-asset-item
+          id="sliedes"
+          src="assets/RIGAS-BIRZA-sliedes.glb"
+        ></a-asset-item>
+      </a-assets>
+
+      <!-- ----- -->
+      <!-- telpa -->
+      <!-- ----- -->
+      <a-gltf-model
+        id="navmesh"
+        src="#grida2"
+        position="0 0 0"
+        color=""
+        visible="false"
+      ></a-gltf-model>
+
+      <a-gltf-model src="#gondola"></a-gltf-model>
+      <a-gltf-model src="#birza"></a-gltf-model>
+      <a-gltf-model src="#sliedes" position="0 2.39 0"></a-gltf-model>
+      <a-gltf-model src="#birzas-caurumi"></a-gltf-model>
+      
+
+      <!---- <a-obj-model
+        id="navmesh2"
+        src="#grida"
+                   position="0 0.2 0"
+        color="red"
+        visible="false"
+      ></a-obj-model> ---->
+
+<a-entity
+        id="rig"
+        movement-controls="speed:0.1"
+        position="-21 1.6 -6"
+        rotation="0 -130 0"
+      >
+        <a-entity
+          camera="fov: 100"
+           look-controls="pointerLockEnabled: true"
+          simple-navmesh-constraint="navmesh:#navmesh"
+        ></a-entity>
+      </a-entity>
+
+
+      <!-- ---- -->
+      <!-- vide -->
+      <!-- ---- -->
+      <a-sky color="#d7fff3"></a-sky>
+      <!-- <a-entity light="type: ambient; color: #BBB; intensity: 1"></a-entity> -->
+      <a-light
+        type="ambient"
+        shadow=""
+        color="#d9ffff"
+        intensity="1"
+        visible=""
+      ></a-light>
+
+      <a-light
+        type="point"
+        color="#fdf8d0"
+        intensity="5"
+        position="-4.17692 5.44123 11.13728"
+      ></a-light>
+      <a-light
+        type="point"
+        color="#fdf8d0"
+        intensity="5"
+        position="-4.17692 5.44123 0.41521"
+      ></a-light>
+      <a-light
+        type="point"
+        color="#fdf8d0"
+        intensity="5"
+        position="-4.17692 5.44123 -10.43334"
+      ></a-light>
+      <a-light
+        type="point"
+        color="#fdf8d0"
+        intensity="5"
+        position="1.44938 5.44123 -10.43334"
+      ></a-light>
+      <a-light
+        type="point"
+        color="#fdf8d0"
+        intensity="5"
+        position="1.44938 5.44123 0.45577"
+      ></a-light>
+      <a-light
+        type="point"
+        color="#fdf8d0"
+        intensity="5"
+        position="1.44938 5.44123 11.18673"
+      ></a-light>
+      <a-light
+        type="point"
+        color="#dffffb"
+        intensity="50"
+        decay="1.35"
+        distance="30.89"
+        position="-17.25365 14.45014 0"
+      ></a-light>
+    </a-scene>
+  </body>
+</html>
